@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "outDir": "./dist",
+        "allowJs": true,
+        "target": "es5",
+        "lib": [
+            "dom",
+            "dom.iterable",
+        ]
+    },
+    // "include": [
+    //     "./src/**/*"
+    // ]
+}
