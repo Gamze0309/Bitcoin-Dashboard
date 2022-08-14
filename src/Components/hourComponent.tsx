@@ -22,18 +22,19 @@ const Item = styled(Paper)(({ theme }) => ({
 const Hour = () => {
     const dispatch: AppDispatch = useDispatch()
     const counter = useSelector((state: RootState) => state.changeCounter)
+    
     useEffect(()=> {
-        if(counter.minute == 59 && !counter.plus) {
-            dispatch(changeHour({plus:false}))
+        if((counter.minute == 59 && counter.second == 59) && !counter.plus) {
+            dispatch(changeHour({plus:false, minus: false}))
         }
-    }, [counter.minute == 59 && !counter.plus])
+    }, [(counter.minute == 59 && counter.second == 59) && !counter.plus])
 
     const btnPlusClick = () => {
-        dispatch(changeHour({plus:true}))
+        dispatch(changeHour({plus:true, minus: false}))
     }
 
     const btnRemoveClick = () => {
-        dispatch(changeHour({plus:false}))
+        dispatch(changeHour({plus:false, minus: true}))
     }
 
     return(

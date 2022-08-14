@@ -25,7 +25,7 @@ const Second = () => {
 
     useEffect(()=> {
         let myInterval = setInterval(()=> {
-            dispatch(changeSecond({plus: false}))
+            dispatch(changeSecond({plus: false, minus: false}))
         }, 1000)
         setIntervalId(myInterval)
         return () => {
@@ -35,18 +35,18 @@ const Second = () => {
 
     const btnPlusClick = () => {
         clearInterval(intervalId)
-        dispatch(changeSecond({plus: true}))
+        dispatch(changeSecond({plus: true, minus: false}))
         let myInterval = setInterval(()=> {
-            dispatch(changeSecond({plus: false}))
+            dispatch(changeSecond({plus: false, minus: false}))
         }, 1000)
         setIntervalId(myInterval)
     }
 
     const btnRemoveClick = () => {
         clearInterval(intervalId)
-        dispatch(changeSecond({plus: false}))
+        dispatch(changeSecond({plus: false, minus: true}))
         let myInterval = setInterval(()=> {
-            dispatch(changeSecond({plus: false}))
+            dispatch(changeSecond({plus: false, minus: false}))
         }, 1000)
         setIntervalId(myInterval)
     }

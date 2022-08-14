@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -23,17 +23,18 @@ const Minute = () => {
     const counter = useSelector((state: RootState) => state.changeCounter)
 
     useEffect(()=> {
+        console.log(counter.plus)
         if (counter.second == 59 && !counter.plus){
-            dispatch(changeMinute({plus:false}))
+            dispatch(changeMinute({plus:false, minus: false}))
         }
     }, [counter.second == 59 && !counter.plus])
 
     const btnPlusClick = () => {
-        dispatch(changeMinute({plus:true}))
+        dispatch(changeMinute({plus:true, minus: false}))
     }
 
     const btnRemoveClick = () => {
-        dispatch(changeMinute({plus:false}))
+        dispatch(changeMinute({plus:false, minus: true}))
     }
 
     return(
