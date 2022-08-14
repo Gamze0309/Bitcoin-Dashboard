@@ -17,6 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const MainComponent = () => {
+
     return (
         <>
             <Box  sx={{ flexGrow: 1, pt: 5}}>

@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState,  AppDispatch } from '../Redux/store';
-import {changeMinute, changeSecond} from '../Redux/Slice/changeCounter';
+import {changeCounter} from '../Redux/Slice/changeCounter';
 import IconButton from '@mui/material/IconButton';
 import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
@@ -21,29 +21,29 @@ const Item = styled(Paper)(({ theme }) => ({
 const Minute = () => {
     const dispatch: AppDispatch = useDispatch()
     const counter = useSelector((state: RootState) => state.changeCounter)
+    const [control, setControl] = useState(false)
 
-    useEffect(()=> {
-        console.log(counter.plus)
-        if (counter.second == 59 && !counter.plus){
-            dispatch(changeMinute({plus:false, minus: false}))
+    useEffect(()=>{
+        if(counter.hour<3600 && (counter.hour/60)%60< 1){
+            setControl(true)
         }
-    }, [counter.second == 59 && !counter.plus])
+    },[counter.hour<3600 && (counter.hour/60)%60<1])
 
     const btnPlusClick = () => {
-        dispatch(changeMinute({plus:true, minus: false}))
+        dispatch(changeCounter({plus:true, value: 60}))
     }
 
     const btnRemoveClick = () => {
-        dispatch(changeMinute({plus:false, minus: true}))
+        dispatch(changeCounter({plus:false, value: 60}))
     }
 
     return(
         <Grid item xs={2}>
-            <Item>{counter.minute}</Item>
+            <Item>{Math.floor((counter.hour/60)%60)}</Item>
             <IconButton aria-label="add" color="primary" onClick={btnPlusClick}>
                 <AddIcon/>
             </IconButton>
-            <IconButton aria-label="remove" color="primary" onClick={btnRemoveClick}>
+            <IconButton disabled={control} aria-label="remove" color="primary" onClick={btnRemoveClick}>
                 <RemoveIcon/>
             </IconButton>
         </Grid>

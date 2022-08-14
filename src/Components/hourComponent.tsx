@@ -1,11 +1,11 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState,  AppDispatch } from '../Redux/store';
-import {changeHour, changeMinute, changeSecond} from '../Redux/Slice/changeCounter';
+import {changeCounter} from '../Redux/Slice/changeCounter';
 import IconButton from '@mui/material/IconButton';
 import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add'
@@ -22,28 +22,29 @@ const Item = styled(Paper)(({ theme }) => ({
 const Hour = () => {
     const dispatch: AppDispatch = useDispatch()
     const counter = useSelector((state: RootState) => state.changeCounter)
-    
-    useEffect(()=> {
-        if((counter.minute == 59 && counter.second == 59) && !counter.plus) {
-            dispatch(changeHour({plus:false, minus: false}))
+    const [control, setControl] = useState(false)
+
+    useEffect(()=>{
+        if(counter.hour<3600){
+            setControl(true)
         }
-    }, [(counter.minute == 59 && counter.second == 59) && !counter.plus])
+    },[counter.hour<3600])
 
     const btnPlusClick = () => {
-        dispatch(changeHour({plus:true, minus: false}))
+        dispatch(changeCounter({plus:true, value: 3600}))
     }
 
     const btnRemoveClick = () => {
-        dispatch(changeHour({plus:false, minus: true}))
+        dispatch(changeCounter({plus:false, value: 3600}))
     }
 
     return(
         <Grid item xs={2}>
-            <Item>{counter.hour}</Item>
+            <Item>{Math.floor(counter.hour/3600)}</Item>
             <IconButton aria-label="add" color="primary" onClick={btnPlusClick}>
                 <AddIcon/>
             </IconButton>
-            <IconButton aria-label="remove" color="primary" onClick={btnRemoveClick}>
+            <IconButton disabled={control} aria-label="remove" color="primary" onClick={btnRemoveClick}>
                 <RemoveIcon/>
             </IconButton>
         </Grid>

@@ -19,7 +19,7 @@ const BitcoinPriceComponent = () => {
     useEffect(()=>{
         let myInterval = setInterval(()=>{
             dispatch(getBitcoinPrice())
-        }, 2000)
+        }, 3000)
         return () => {
             clearInterval(myInterval)
         }
