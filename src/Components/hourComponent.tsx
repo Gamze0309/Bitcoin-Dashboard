@@ -29,6 +29,13 @@ const Hour = () => {
             setControl(true)
         }
     },[counter.hour<3600])
+    
+    useEffect(()=>{
+        if(counter.hour>3600){
+            setControl(false)
+        }
+        return;
+    },[counter.hour>3600])
 
     const btnPlusClick = () => {
         dispatch(changeCounter({plus:true, value: 3600}))

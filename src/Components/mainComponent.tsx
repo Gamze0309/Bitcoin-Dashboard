@@ -8,14 +8,6 @@ import Hour from './hourComponent';
 import BitcoinPriceComponent from './bitcoinPriceComponent';
 import Divider from '@mui/material/Divider';
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#1A2027',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: '#BDBFBE',
-}));
-
 const MainComponent = () => {
 
     return (
