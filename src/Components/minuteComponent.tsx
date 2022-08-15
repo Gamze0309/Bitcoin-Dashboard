@@ -32,7 +32,6 @@ const Minute = () => {
     useEffect(()=>{
         if(counter.hour>3600 || (counter.hour/60)%60>1){
             setControl(false)
-            console.log('girdi')
         }
         
         return;
